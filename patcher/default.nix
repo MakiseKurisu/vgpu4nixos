@@ -37,7 +37,7 @@ pkgs.stdenv.mkDerivation {
   inherit version;
 
   src = pkgs.fetchFromGitHub {
-    owner = "VGPU-Community-Drivers";
+    owner = "MakiseKurisu";
     repo = "vGPU-Unlock-patcher";
     fetchSubmodules = true;
     inherit rev sha256;
