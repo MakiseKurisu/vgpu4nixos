@@ -29,7 +29,7 @@
 }@args:
 
 { lib
-, stdenv
+, gcc14Stdenv
 , runCommandLocal
 , patchutils
 , callPackage
@@ -103,7 +103,7 @@ let
     xorg.libXrandr
     xorg.libxcb
     zlib
-    stdenv.cc.cc
+    gcc14Stdenv.cc.cc
     wayland
     mesa
     libGL
@@ -111,7 +111,7 @@ let
     dbus # for nvidia-powerd
   ]);
 
-  self = stdenv.mkDerivation {
+  self = gcc14Stdenv.mkDerivation {
     name = "nvidia-vgpu-${version}-${kernel.version}";
 
     builder = ./builder.sh;
@@ -128,7 +128,7 @@ let
     inherit prePatch postPatch patchFlags;
     inherit preInstall postInstall;
     inherit version useGLVND useProfiles;
-    inherit (stdenv.hostPlatform) system;
+    inherit (gcc14Stdenv.hostPlatform) system;
     inherit guiBundled i686bundled;
 
     postFixup = lib.optionalString (!guest) ''
